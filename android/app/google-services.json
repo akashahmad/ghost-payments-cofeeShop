@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "264237725329",
+    "firebase_url": "https://ghost-payments.firebaseio.com",
+    "project_id": "ghost-payments",
+    "storage_bucket": "ghost-payments.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264237725329:android:1e70f7dd4f8915c9d43130",
+        "android_client_info": {
+          "package_name": "com.ghostpayipad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264237725329-ud011q3u5grk8tqekalil433hfqnqdm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-5fmhKbETRr0OYQat1XEHxMC3y4vYI6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264237725329-ud011q3u5grk8tqekalil433hfqnqdm9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "264237725329-f95sd04n49078f9l1k93igb81l2cs89a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ghostpayments"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264237725329:android:f4e765c6033f4093d43130",
+        "android_client_info": {
+          "package_name": "com.ghostpayments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264237725329-ud011q3u5grk8tqekalil433hfqnqdm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-5fmhKbETRr0OYQat1XEHxMC3y4vYI6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264237725329-ud011q3u5grk8tqekalil433hfqnqdm9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "264237725329-f95sd04n49078f9l1k93igb81l2cs89a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ghostpayments"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

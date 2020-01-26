@@ -3,6 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'GhostPayIpad' do
   # Pods for GhostPayIpad
+  pod 'Firebase'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Functions'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -33,6 +39,8 @@ target 'GhostPayIpad' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'GhostPayIpadTests' do
     inherit! :search_paths
