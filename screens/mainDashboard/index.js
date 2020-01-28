@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     Image,
+    ScrollView
 } from 'react-native';
 import Logo from '../../assets/img/logo.png';
 import Avatar from '../../assets/img/avatar.png';
@@ -60,56 +61,59 @@ const DashBoard = (props) => {
                 const long = parseFloat(locations[0].longitude);
                 let location = [lat, long];
                 const geoFire = new GeoFire(firebase.database().ref("/geolocs"));
-                geoFire.query({radius: 500, center: location}).on('key_entered', (key) => {
+                geoFire.query({radius: 0.01524, center: location}).on('key_entered', (key) => {
                     keys.push(key);
-                    setNewUsers(keys);
+                    setNewUsers(distinctArray(keys));
                 })
             }
         );
     };
     const setNewUsers = (newUsers) => {
+        let list = [];
         newUsers.forEach(val => {
-            let list = [];
             firebase.database()
                 .ref('/users/' + val)
                 .once('value',
                     (snapshot) => {
                         list = [...list, snapshot.val()];
                         setUsers([...list])
-                        console.log(list)
                     })
         });
     };
     let uniqueUsers = distinct(users, "uid");
-    // console.log(uniqueUsers)
     let {navigation} = props;
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={styles.newContainerHero}>
-                <Image
-                    source={Logo}
-                    style={styles.logoImage}
-                />
-                <View style={styles.cardContainer}>
-                    {uniqueUsers && uniqueUsers.length !== 0 && uniqueUsers.map((sin, ind) =>
-                        <TouchableOpacity key={ind} onPress={() => navigation.navigate('Payment')} style={styles.card}>
-                            <View style={styles.nameContainer}>
-                                <Text style={styles.nameContainerText}>{(sin.firstName ? sin.firstName: "") + sin.lastName?(" "+sin.lastName):""}</Text>
-                            </View>
-                            <View style={styles.imageContainer}>
-                                <Image
-                                    source={sin.photoURL ? ({uri: sin.photoURL}) : Avatar}
-                                    style={styles.avatarImage}
-                                />
-                            </View>
-                            <View style={styles.coffeeContainer}>
-                                <Text style={styles.coffeeContainerText}>{sin.favoriteCoffee?sin.favoriteCoffee:"No favorite Coffee added"}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    )}
+            <ScrollView>
+                <View style={styles.newContainerHero}>
+                    <Image
+                        source={Logo}
+                        style={styles.logoImage}
+                    />
+                    <View style={styles.cardContainer}>
+                        {uniqueUsers && uniqueUsers.length !== 0 && uniqueUsers.map((sin, ind) =>
+                            <TouchableOpacity key={ind} onPress={() => navigation.navigate('Payment')}
+                                              style={styles.card}>
+                                <View style={styles.nameContainer}>
+                                    <Text
+                                        style={styles.nameContainerText}>{((sin.firstName ? sin.firstName : "") + (sin.lastName ? (" " + sin.lastName) : ""))}</Text>
+                                </View>
+                                <View style={styles.imageContainer}>
+                                    <Image
+                                        source={sin.photoURL ? ({uri: sin.photoURL}) : Avatar}
+                                        style={styles.avatarImage}
+                                    />
+                                </View>
+                                <View style={styles.coffeeContainer}>
+                                    <Text
+                                        style={styles.coffeeContainerText}>{sin.favoriteCoffee ? sin.favoriteCoffee : "No favorite Coffee added"}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </View>
     );
 };
