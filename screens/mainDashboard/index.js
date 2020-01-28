@@ -128,12 +128,14 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: 'center',
         // alignItems: 'center',
-        height: '40%',
+        // height: '120%',
+        marginTop: 20
     },
 
     cardContainer: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '100%'
     },
 
     coffeeContainer: {
@@ -190,13 +192,6 @@ const styles = StyleSheet.create({
         height: 160,
         marginTop: 35,
         marginLeft: '5%'
-    },
-
-    cardContainer: {
-        // paddingTop: 70,
-        // paddingBottom: 70,
-        // paddingRight: 0,
-        // paddingLeft: 0
     },
 
     businessNameText: {
