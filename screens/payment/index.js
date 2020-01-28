@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     View,
@@ -10,56 +10,72 @@ import {
 } from 'react-native';
 import Avatar from '../../assets/img/avatar.png';
 import {showMessage} from "react-native-flash-message";
-
+import uuid from 'uuid';
+import {apiPath} from '../../config';
+import axios from 'axios';
 const Payment = (props) => {
-    let {businessName, user, navigation} = props;
+    let {businessName, user, navigation, dispatch} = props;
+    const [uid] = useState(uuid());
+    const [quantity, setQuantity] = useState(0);
+    const [quantityCheck, setQuantityCheck] = useState(false);
+    const [total, setTotal] = useState(0.0);
+    const [totalCheck, setTotalCheck] = useState(false);
+    const [coffeeName, setCoffeeName] = useState("");
+    const [coffeeNameCheck, setCoffeeNameCheck] = useState(false);
+
     const addPayment = () => {
-        // let requestedData = {
-        //     card,
-        //     email: user.email,
-        //     user
-        // };
-        // console.log("requestedData", JSON.stringify(requestedData));
-        // if (!valid) {
-        //     setErrorMessage(true)
-        // }
-        // else {
-        //     dispatch({
-        //         type: "SET_LOADER",
-        //         payload: true
-        //     });
-        //     axios.post(apiPath + "/addPaymentDetail", requestedData).then(res => {
-        //         dispatch({
-        //             type: "SET_LOADER",
-        //             payload: false
-        //         });
-        showMessage({
-            message: "Payment Successfully Deducted.",
-            type: "success",
-            backgroundColor: "#28a745",
-            color: "white",
-            icon: "info",
-            duration: 5000
-        });
-        navigation.navigate('Home');
-        //     }).catch(err => {
-        //         dispatch({
-        //             type: "SET_LOADER",
-        //             payload: false
-        //         });
-        //         if (err.response && err.response.data && err.response.data.err && err.response.data.err.raw && err.response.data.err.raw.message) {
-        //             showMessage({
-        //                 message: err.response.data.err.raw.message,
-        //                 type: "danger",
-        //                 backgroundColor: "red",
-        //                 color: "white",
-        //                 icon: "info",
-        //                 duration: 5000
-        //             })
-        //         }
-        //         console.log(err)
-        //     })
-        // }
+        let requestedData = {
+            uid,
+            user,
+            shopName: businessName,
+            coffeeName,
+            totalCharged: total,
+        };
+        if (!quantity | !coffeeName | !total) {
+            if (!quantity) {
+                setQuantityCheck(true)
+            }
+            if (!coffeeName) {
+                setCoffeeNameCheck(true)
+            }
+            if (!total) {
+                setTotalCheck(true)
+            }
+        }
+        else {
+            dispatch({
+                type: "SET_LOADER",
+                payload: true
+            });
+            axios.post(apiPath + "/charge", requestedData).then(res => {
+                dispatch({
+                    type: "SET_LOADER",
+                    payload: false
+                });
+                showMessage({
+                    message: "Payment Successfully Deducted.",
+                    type: "success",
+                    backgroundColor: "#28a745",
+                    color: "white",
+                    icon: "info",
+                    duration: 5000
+                });
+                navigation.navigate('Home');
+            }).catch(err => {
+                dispatch({
+                    type: "SET_LOADER",
+                    payload: false
+                });
+                showMessage({
+                    message: err.message,
+                    type: "danger",
+                    backgroundColor: "red",
+                    color: "white",
+                    icon: "info",
+                    duration: 5000
+                })
+            })
+        }
     };
     return (
         <View style={styles.container}>
@@ -81,14 +97,34 @@ const Payment = (props) => {
                             style={styles.orderText}>{((user.firstName ? user.firstName : "") + (user.lastName ? (" " + user.lastName) : ""))}</Text>
                         <View style={styles.quantityOrderContainer}>
                             <View>
-                                <TextInput style={styles.quantityInput}/>
+                                <TextInput
+                                    value={quantity ? quantity : ""}
+                                    keyboardType={'numeric'}
+                                    onChangeText={(text) => {
+                                        setQuantityCheck(false);
+                                        setQuantity(text.replace(/[^0-9]/g, ''))
+                                    }}
+                                    style={styles.quantityInput}
+                                />
+                                {quantityCheck && <View>
+                                    <Text style={{color: "red"}}>Quantity is required</Text>
+                                </View>}
                                 <Text style={styles.quantityText}>Quantity</Text>
                             </View>
                             <View>
                                 <Text style={styles.xText}>X</Text>
                             </View>
                             <View>
-                                <TextInput style={styles.orderInput}/>
+                                <TextInput
+                                    onChangeText={(text) => {
+                                        setCoffeeNameCheck(false);
+                                        setCoffeeName(text)
+                                    }}
+                                    style={styles.orderInput}
+                                />
+                                {coffeeNameCheck && <View>
+                                    <Text style={{color: "red"}}>Name is Requird</Text>
+                                </View>}
                                 <Text style={styles.orderCoffeeText}>Name of item</Text>
                             </View>
                         </View>
@@ -100,9 +136,21 @@ const Payment = (props) => {
                                 <Text style={styles.moneyText}>$</Text>
                             </View>
                             <View>
-                                <TextInput style={styles.totalInput}/>
+                                <TextInput
+                                    value={total ? total : ""}
+                                    onChangeText={(text) => {
+                                        setTotalCheck(false);
+                                        setTotal(text.replace(/[^\d.]/g, ''))
+                                    }}
+                                    keyboardType={'numeric'}
+                                    style={styles.totalInput}/>
                             </View>
                         </View>
+                        {totalCheck && <View style={styles.quantityOrderContainer}>
+                            <View>
+                                <Text style={{color: "red"}}>Total is required</Text>
+                            </View>
+                        </View>}
                         <TouchableOpacity
                             onPress={() => addPayment()}
                             style={styles.signButtonnn}>

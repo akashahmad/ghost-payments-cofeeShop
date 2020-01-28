@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
+    "axios": "^0.19.2",
     "firebase": "^7.7.0",
     "geofire": "^5.0.1",
     "react": "16.9.0",
@@ -23,7 +24,8 @@
     "react-native-safe-area-view": "^1.0.0",
     "react-navigation": "^4.0.10",
     "react-navigation-drawer": "^2.3.3",
-    "react-navigation-stack": "^2.0.16"
+    "react-navigation-stack": "^2.0.16",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
