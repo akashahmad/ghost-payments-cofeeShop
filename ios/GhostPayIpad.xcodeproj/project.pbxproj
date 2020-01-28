@@ -37,6 +37,34 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "GhostPayIpad-tvOS";
 		};
+		41483AF323DFD7C100799155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13B07F961A680F5B00A75B9A;
+			remoteInfo = GhostPayments;
+		};
+		41483AF523DFD7C100799155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00E356EE1AD99517003FC87E;
+			remoteInfo = GhostPaymentsTests;
+		};
+		41483AF723DFD7C100799155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D02E47B1E0B4A5D006451C7;
+			remoteInfo = "GhostPayments-tvOS";
+		};
+		41483AF923DFD7C100799155 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D02E4901E0B4A5D006451C7;
+			remoteInfo = "GhostPayments-tvOSTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +83,7 @@
 		2D02E47B1E0B4A5D006451C7 /* GhostPayIpad-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GhostPayIpad-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* GhostPayIpad-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GhostPayIpad-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D6F4931027FE3BEA8B6D77 /* libPods-GhostPayIpad-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GhostPayIpad-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GhostPayments.xcodeproj; path = ../../GhostPayments/ios/GhostPayments.xcodeproj; sourceTree = "<group>"; };
 		4A1170172B1B1597840871F6 /* Pods-GhostPayIpad-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GhostPayIpad-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-GhostPayIpad-tvOS/Pods-GhostPayIpad-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		517658920A870D0400392755 /* Pods-GhostPayIpad-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GhostPayIpad-tvOS.release.xcconfig"; path = "Target Support Files/Pods-GhostPayIpad-tvOS/Pods-GhostPayIpad-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		603F12032DAB4B2A665814DF /* libPods-GhostPayIpad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GhostPayIpad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,9 +178,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		41483AEC23DFD7C100799155 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41483AF423DFD7C100799155 /* GhostPayments.app */,
+				41483AF623DFD7C100799155 /* GhostPaymentsTests.xctest */,
+				41483AF823DFD7C100799155 /* GhostPayments-tvOS.app */,
+				41483AFA23DFD7C100799155 /* GhostPayments-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -314,6 +355,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 41483AEC23DFD7C100799155 /* Products */;
+					ProjectRef = 41483AEB23DFD7C100799155 /* GhostPayments.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* GhostPayIpad */,
@@ -323,6 +370,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		41483AF423DFD7C100799155 /* GhostPayments.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = GhostPayments.app;
+			remoteRef = 41483AF323DFD7C100799155 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41483AF623DFD7C100799155 /* GhostPaymentsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GhostPaymentsTests.xctest;
+			remoteRef = 41483AF523DFD7C100799155 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41483AF823DFD7C100799155 /* GhostPayments-tvOS.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "GhostPayments-tvOS.app";
+			remoteRef = 41483AF723DFD7C100799155 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41483AFA23DFD7C100799155 /* GhostPayments-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "GhostPayments-tvOSTests.xctest";
+			remoteRef = 41483AF923DFD7C100799155 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {

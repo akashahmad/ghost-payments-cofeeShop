@@ -37,6 +37,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+    <string>UI Background Permission</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>Location Permission</string>
     <key>NSLocationAlwaysUsageDescription</key>
