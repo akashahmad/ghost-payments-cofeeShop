@@ -179,6 +179,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-location')
     implementation project(':react-native-firebase')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -186,6 +187,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-auth:18.1.0"
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation "com.google.android.gms:play-services-location:16.0.0"
     implementation 'com.google.firebase:firebase-database:18.0.0'
     implementation 'com.google.firebase:firebase-functions:19.0.1'
     implementation "com.google.firebase:firebase-storage:19.1.0"

@@ -9,8 +9,8 @@ const reducer = (state, action) => {
             return {...state, id: action.payload};
         case "SET_LOADER":
             return {...state, loader: action.payload};
-        case "SET_LOGGEDIN":
-            return {...state, loggedIn: action.payload};
+        case "SET_BUSINESS_NAME":
+            return {...state, businessName: action.payload};
         default:
             return state;
     }
@@ -24,7 +24,7 @@ export class Provider extends Component {
         id: null,
         user: null,
         loader: false,
-        loggedIn: false
+        businessName: null
     };
 
     render() {
