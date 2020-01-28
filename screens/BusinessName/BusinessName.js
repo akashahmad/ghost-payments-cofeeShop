@@ -9,17 +9,13 @@ import {
 } from 'react-native';
 
 const App = (props) => {
-    let {dispatch} = props;
-    const [businessName, setBusinessName] = useState(null);
+    let {dispatch, businessName, navigation} = props;
     const [businessNameEmpty, setBusinessNameEmp] = useState(false);
     const signIn = () => {
         if (!businessName) {
             setBusinessNameEmp(true)
         } else {
-            dispatch({
-                type: "SET_BUSINESS_NAME",
-                payload: businessName
-            })
+            navigation.navigate('Home')
         }
     };
     return (
@@ -29,9 +25,13 @@ const App = (props) => {
                 <Text style={styles.businessNameText}>Name of Business</Text>
                 <TextInput
                     autoFocus
+                    value={businessName}
                     onChangeText={value => {
                         setBusinessNameEmp(false);
-                        setBusinessName(value)
+                        dispatch({
+                            type: "SET_BUSINESS_NAME",
+                            payload: value
+                        })
                     }}
                     style={styles.businessNameField}
                     placeholder='Name of business'/>

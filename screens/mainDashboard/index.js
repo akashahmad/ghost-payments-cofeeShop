@@ -8,6 +8,7 @@ import {
     Image,
     ScrollView
 } from 'react-native';
+import {showMessage} from "react-native-flash-message";
 import Logo from '../../assets/img/logo.png';
 import Avatar from '../../assets/img/avatar.png';
 import RNLocation from 'react-native-location';
@@ -32,9 +33,10 @@ RNLocation.configure({
     headingOrientation: "portrait",
     pausesLocationUpdatesAutomatically: false,
     showsBackgroundLocationIndicator: true,
-})
+});
 const DashBoard = (props) => {
     const [users, setUsers] = useState([]);
+    let {navigation, dispatch} = props;
     useEffect(() => {
         RNLocation.requestPermission({
             ios: 'always', // or 'always'
@@ -62,7 +64,13 @@ const DashBoard = (props) => {
                 let location = [lat, long];
                 const geoFire = new GeoFire(firebase.database().ref("/geolocs"));
                 geoFire.query({radius: 0.01524, center: location}).on('key_entered', (key) => {
+                    console.log(key)
                     keys.push(key);
+                    setNewUsers(distinctArray(keys));
+                });
+                geoFire.query({radius: 0.01524, center: location}).on('key_exited', (key) => {
+                    keys.filter(sin => sin !== key);
+                    console.log(key);
                     setNewUsers(distinctArray(keys));
                 })
             }
@@ -81,7 +89,6 @@ const DashBoard = (props) => {
         });
     };
     let uniqueUsers = distinct(users, "uid");
-    let {navigation} = props;
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -93,7 +100,24 @@ const DashBoard = (props) => {
                     />
                     <View style={styles.cardContainer}>
                         {uniqueUsers && uniqueUsers.length !== 0 && uniqueUsers.map((sin, ind) =>
-                            <TouchableOpacity key={ind} onPress={() => navigation.navigate('Payment')}
+                            <TouchableOpacity key={ind} onPress={() => {
+                                if (sin.paymentId) {
+                                    dispatch({
+                                        type: "SET_USER",
+                                        payload: sin
+                                    });
+                                    navigation.navigate('Payment')
+                                } else {
+                                    showMessage({
+                                        message: "This user Payment method is not verified",
+                                        type: "danger",
+                                        backgroundColor: "red",
+                                        color: "white",
+                                        icon: "info",
+                                        duration: 5000
+                                    })
+                                }
+                            }}
                                               style={styles.card}>
                                 <View style={styles.nameContainer}>
                                     <Text
@@ -109,6 +133,10 @@ const DashBoard = (props) => {
                                     <Text
                                         style={styles.coffeeContainerText}>{sin.favoriteCoffee ? sin.favoriteCoffee : "No favorite Coffee added"}</Text>
                                 </View>
+                                {!sin.paymentId&&<View style={styles.coffeeContainer}>
+                                    <Text
+                                        style={styles.coffeeContainerText}>"Payment method UnVerified"</Text>
+                                </View>}
                             </TouchableOpacity>
                         )}
                     </View>
@@ -134,6 +162,7 @@ const styles = StyleSheet.create({
 
     cardContainer: {
         display: 'flex',
+        flexWrap: "wrap",
         flexDirection: 'row',
         width: '100%'
     },
@@ -189,7 +218,6 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: 'white',
         width: 160,
-        height: 160,
         marginTop: 35,
         marginLeft: '5%'
     },

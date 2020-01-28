@@ -9,9 +9,58 @@ import {
     Image,
 } from 'react-native';
 import Avatar from '../../assets/img/avatar.png';
+import {showMessage} from "react-native-flash-message";
 
 const Payment = (props) => {
-    let {businessName} = props;
+    let {businessName, user, navigation} = props;
+    const addPayment = () => {
+        // let requestedData = {
+        //     card,
+        //     email: user.email,
+        //     user
+        // };
+        // console.log("requestedData", JSON.stringify(requestedData));
+        // if (!valid) {
+        //     setErrorMessage(true)
+        // }
+        // else {
+        //     dispatch({
+        //         type: "SET_LOADER",
+        //         payload: true
+        //     });
+        //     axios.post(apiPath + "/addPaymentDetail", requestedData).then(res => {
+        //         dispatch({
+        //             type: "SET_LOADER",
+        //             payload: false
+        //         });
+        showMessage({
+            message: "Payment Successfully Deducted.",
+            type: "success",
+            backgroundColor: "#28a745",
+            color: "white",
+            icon: "info",
+            duration: 5000
+        });
+        navigation.navigate('Home');
+        //     }).catch(err => {
+        //         dispatch({
+        //             type: "SET_LOADER",
+        //             payload: false
+        //         });
+        //         if (err.response && err.response.data && err.response.data.err && err.response.data.err.raw && err.response.data.err.raw.message) {
+        //             showMessage({
+        //                 message: err.response.data.err.raw.message,
+        //                 type: "danger",
+        //                 backgroundColor: "red",
+        //                 color: "white",
+        //                 icon: "info",
+        //                 duration: 5000
+        //             })
+        //         }
+        //         console.log(err)
+        //     })
+        // }
+    };
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -22,23 +71,24 @@ const Payment = (props) => {
                     <View style={styles.cardss}>
                         <View style={styles.avatarImageContainer}>
                             <Image
-                                source={Avatar}
+                                source={user.photoURL ? ({uri: user.photoURL}) : Avatar}
                                 style={styles.avatarImage}
                             />
                         </View>
                     </View>
                     <View style={styles.orderContainer}>
-                        <Text style={styles.orderText}>Danny Minutillo</Text>
+                        <Text
+                            style={styles.orderText}>{((user.firstName ? user.firstName : "") + (user.lastName ? (" " + user.lastName) : ""))}</Text>
                         <View style={styles.quantityOrderContainer}>
                             <View>
-                                <TextInput style={styles.quantityInput}></TextInput>
+                                <TextInput style={styles.quantityInput}/>
                                 <Text style={styles.quantityText}>Quantity</Text>
                             </View>
                             <View>
                                 <Text style={styles.xText}>X</Text>
                             </View>
                             <View>
-                                <TextInput style={styles.orderInput}></TextInput>
+                                <TextInput style={styles.orderInput}/>
                                 <Text style={styles.orderCoffeeText}>Name of item</Text>
                             </View>
                         </View>
@@ -50,10 +100,12 @@ const Payment = (props) => {
                                 <Text style={styles.moneyText}>$</Text>
                             </View>
                             <View>
-                                <TextInput style={styles.totalInput}></TextInput>
+                                <TextInput style={styles.totalInput}/>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.signButtonnn}>
+                        <TouchableOpacity
+                            onPress={() => addPayment()}
+                            style={styles.signButtonnn}>
                             <Text style={styles.logInButtonnnTextss}>CHARGE</Text>
                         </TouchableOpacity>
                     </View>

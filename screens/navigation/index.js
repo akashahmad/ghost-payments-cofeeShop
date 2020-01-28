@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from 'react-navigation-stack';
 import {View} from "react-native";
+import BusinessName from "../BusinessName/container";
 import MainDashboard from "../mainDashboard/container";
 import Payment from "../payment/container";
 
@@ -14,6 +15,12 @@ function Navgation() {
 
 
 const AppStack = createStackNavigator({
+    BusinessName: {
+        screen: BusinessName,
+        navigationOptions: ({navigation}) => ({
+            headerTitle: " "
+        })
+    },
     Home: {
         screen: MainDashboard,
         navigationOptions: ({navigation}) => ({

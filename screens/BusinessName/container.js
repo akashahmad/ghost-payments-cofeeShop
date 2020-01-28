@@ -1,13 +1,16 @@
 import React from "react";
 import Component from "./BusinessName";
 import {Consumer} from '../../store';
-const index = () => {
+const index = (props) => {
+    let {navigation} = props;
     return (
         <Consumer>
             {
-                ({dispatch}) => (
+                ({dispatch, businessName}) => (
                     <Component
                         dispatch={dispatch}
+                        businessName={businessName}
+                        navigation={navigation}
                     />
                 )
             }

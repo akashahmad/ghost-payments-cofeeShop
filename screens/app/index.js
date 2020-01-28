@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import BusinessName from "../BusinessName/container";
 import Navigations from "../navigation/container";
 import {View, StatusBar} from "react-native";
 import Loader from "../commonComponents/loader";
-function App({loader, businessName}) {
+function App({loader}) {
 
     return <View style={{flex: 1}}>
         <StatusBar hidden/>
-        {
-            businessName ?
-                <Navigations/>
-                :
-                <BusinessName/>
-        }
+        <Navigations/>
         {
             loader &&
             <Loader/>
